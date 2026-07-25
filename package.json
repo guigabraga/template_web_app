@@ -4,9 +4,19 @@
   "version": "1.0.0",
   "type": "module",
   "packageManager": "npm@10.8.2",
+  "engines": {
+    "node": ">=22.12.0",
+    "npm": ">=10.8.2"
+  },
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
+    "dev:web": "npm run dev --workspace @template-web-app/web",
+    "build:web": "npm run build --workspace @template-web-app/web",
+    "preview:web": "npm run preview --workspace @template-web-app/web",
+    "db:generate": "npm run generate --workspace @template-web-app/db",
+    "db:migrate": "npm run db:migrate --workspace @template-web-app/db",
+    "db:studio": "npm run db:studio --workspace @template-web-app/db",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "turbo run typecheck",
