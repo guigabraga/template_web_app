@@ -1,0 +1,10 @@
+node_modules/
+dist/
+build/
+coverage/
+.turbo/
+
+**/.agents/
+**/.claude/
+**/.windsurf/
+packages/db/src/generated/

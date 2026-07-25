@@ -1,0 +1,6 @@
+{
+  "name": "@template-web-app/api",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module"
+}
