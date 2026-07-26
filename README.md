@@ -134,19 +134,33 @@ npm run preview --workspace @template-web-app/web
 
 ### Banco de dados
 
-O pacote `db` não inicia um servidor. Ele disponibiliza comandos do Prisma:
+O workspace `packages/db` centraliza o Prisma Client, o schema e as migrations.
+A API importa o singleton pelo pacote `@template-web-app/db` e abre a conexão
+com o PostgreSQL antes de iniciar o servidor.
+
+O Prisma CLI lê as credenciais de `compose/dev/.env`. Com o PostgreSQL do
+Docker em execução, use:
 
 ```bash
 npm run db:generate
+npm run db:migrate:create -- --name nome_da_migration
 npm run db:migrate
+npm run db:migrate:deploy
 npm run db:studio
 ```
+
+`db:migrate:create` gera o arquivo SQL sem aplicá-lo. `db:migrate` cria e aplica
+migrations no desenvolvimento, e `db:migrate:deploy` aplica migrations já
+existentes. Neste momento o schema não possui models e nenhuma tabela da
+aplicação é criada.
 
 Os mesmos comandos podem ser executados diretamente no workspace:
 
 ```bash
 npm run generate --workspace @template-web-app/db
+npm run db:migrate:create --workspace @template-web-app/db -- --name nome_da_migration
 npm run db:migrate --workspace @template-web-app/db
+npm run db:migrate:deploy --workspace @template-web-app/db
 npm run db:studio --workspace @template-web-app/db
 ```
 
@@ -161,8 +175,9 @@ npm run start:api
 npm run typecheck:api
 ```
 
-Durante o desenvolvimento, `tsx` observa alterações em `src/Server.ts`. Após o
-build, o comando `start` executa o JavaScript gerado em `dist/Server.js`.
+Durante o desenvolvimento, `tsx` observa os arquivos TypeScript em `src`. O
+pacote de banco é gerado e compilado antes da API. Após o build, o comando
+`start` executa o JavaScript gerado em `dist/Server.js`.
 
 Também é possível chamar diretamente o workspace:
 
@@ -176,7 +191,7 @@ npm run typecheck --workspace @template-web-app/api
 Para verificar a API em execução, acesse:
 
 ```text
-GET http://localhost:3333/health
+GET http://localhost:1001/health
 ```
 
 ## Qualidade de código

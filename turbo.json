@@ -1,11 +1,13 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "globalEnv": ["DATABASE_URL"],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]
     },
     "dev": {
+      "dependsOn": ["^build"],
       "cache": false,
       "persistent": true
     },
@@ -16,6 +18,12 @@
       "cache": false
     },
     "db:migrate": {
+      "cache": false
+    },
+    "db:migrate:create": {
+      "cache": false
+    },
+    "db:migrate:deploy": {
       "cache": false
     },
     "db:studio": {

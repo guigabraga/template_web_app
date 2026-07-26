@@ -3,16 +3,35 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "prisma"
+  ],
   "scripts": {
     "generate": "prisma generate",
+    "build": "npm run generate && tsc -p tsconfig.json",
+    "typecheck": "npm run generate && tsc --noEmit -p tsconfig.json",
     "db:migrate": "prisma migrate dev",
+    "db:migrate:create": "prisma migrate dev --create-only",
+    "db:migrate:deploy": "prisma migrate deploy",
     "db:studio": "prisma studio"
   },
   "dependencies": {
-    "@prisma/client": "^7.9.0"
+    "@prisma/adapter-pg": "^7.9.0",
+    "@prisma/client": "^7.9.0",
+    "pg": "^8.16.3"
   },
   "devDependencies": {
     "@types/node": "^26.1.1",
+    "@types/pg": "^8.15.5",
     "dotenv": "^17.2.3",
     "prisma": "^7.9.0",
     "typescript": "^6.0.3"
