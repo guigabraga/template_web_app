@@ -37,14 +37,6 @@ Na raiz do repositório, instale todas as dependências dos workspaces:
 npm install
 ```
 
-Para utilizar o Prisma, crie o arquivo de ambiente do pacote de banco:
-
-```bash
-cp packages/db/.env.example packages/db/.env
-```
-
-Altere `DATABASE_URL` em `packages/db/.env` conforme a conexão do PostgreSQL.
-
 ## Executar o monorepo
 
 O comando geral utiliza o Turborepo para iniciar todos os workspaces que
@@ -61,6 +53,56 @@ Para gerar todos os builds disponíveis:
 
 ```bash
 npm run build
+```
+
+## Docker Compose
+
+Os ambientes Docker ficam em `compose/dev`, `compose/homolog` e `compose/prod`.
+Somente o ambiente de desenvolvimento está configurado neste momento.
+
+O arquivo `compose/dev/.env` centraliza as portas externas e as credenciais do
+PostgreSQL. Dentro da rede Docker, a API usa a porta `1001`, o web usa `1002` e
+o PostgreSQL usa `5432`.
+
+Ao preparar um novo clone do projeto:
+
+```bash
+cp compose/dev/.env.example compose/dev/.env
+```
+
+Para subir API, web e PostgreSQL:
+
+```bash
+npm run compose:dev:up
+```
+
+Esse comando executa `npm ci --include=dev` para todos os workspaces antes de
+iniciar as aplicações. API e web só são iniciados quando a instalação termina
+com sucesso. Um volume Docker mantém o cache de downloads do npm entre
+execuções.
+
+Serviços disponíveis com os valores padrão:
+
+```text
+Web:        http://localhost:3002
+API:        http://localhost:3001
+Health:     http://localhost:3001/health
+PostgreSQL: localhost:5432
+```
+
+Comandos de gerenciamento:
+
+```bash
+npm run compose:dev:config
+npm run compose:dev:ps
+npm run compose:dev:logs
+npm run compose:dev:down
+```
+
+Para encerrar os serviços e apagar também os dados locais do PostgreSQL:
+
+```bash
+npm run compose:dev:reset
 ```
 
 ## Executar isoladamente

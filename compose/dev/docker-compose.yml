@@ -1,0 +1,110 @@
+name: ${COMPOSE_PROJECT_NAME:-template-web-app-dev}
+
+x-node-service: &node-service
+  image: template-web-app-dev:local
+  working_dir: /workspace
+  init: true
+  restart: unless-stopped
+  volumes:
+    - ../..:/workspace
+    - node_modules:/workspace/node_modules
+    - npm_cache:/root/.npm
+  networks:
+    - application
+
+services:
+  dependencies:
+    <<: *node-service
+    build:
+      context: ../..
+      dockerfile: compose/dev/Dockerfile
+    command: npm ci --include=dev
+    restart: "no"
+    environment:
+      NODE_ENV: development
+
+  postgres:
+    image: postgres:17-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - "127.0.0.1:${POSTGRES_EXTERNAL_PORT}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        ["CMD-SHELL", 'pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    networks:
+      - application
+
+  api:
+    <<: *node-service
+    command: npm run dev:api
+    environment:
+      NODE_ENV: development
+      API_HOST: 0.0.0.0
+      API_PORT: 1001
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      CHOKIDAR_USEPOLLING: "true"
+    ports:
+      - "127.0.0.1:${API_EXTERNAL_PORT}:1001"
+    depends_on:
+      dependencies:
+        condition: service_completed_successfully
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:1001/health').then((response) => { if (!response.ok) process.exit(1) }).catch(() => process.exit(1))",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  web:
+    <<: *node-service
+    command: npm run dev:web
+    environment:
+      NODE_ENV: development
+      VITE_HOST: 0.0.0.0
+      VITE_PORT: 1002
+      VITE_API_URL: http://localhost:${API_EXTERNAL_PORT}
+      CHOKIDAR_USEPOLLING: "true"
+    ports:
+      - "127.0.0.1:${WEB_EXTERNAL_PORT}:1002"
+    depends_on:
+      api:
+        condition: service_healthy
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "node",
+          "-e",
+          "fetch('http://127.0.0.1:1002').then((response) => { if (!response.ok) process.exit(1) }).catch(() => process.exit(1))",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+volumes:
+  node_modules:
+  npm_cache:
+  postgres_data:
+
+networks:
+  application:
+    driver: bridge
