@@ -147,6 +147,16 @@ npm run lint:fix
 npm run format
 ```
 
+## Temas
+
+O seletor no navbar oferece os modos claro, escuro e sistema usando os temas
+padrão do Material UI. A preferência é gerenciada pelo store Zustand em
+`apps/web/src/store/theme.ts` e persistida no `localStorage` com a chave
+`template-web-app-theme`.
+
+O provider central em `apps/web/src/theme/index.tsx` acompanha alterações do tema
+do sistema quando o modo selecionado é `system`.
+
 ### VS Code
 
 Abra a raiz do monorepo no VS Code, e não apenas um workspace interno:
