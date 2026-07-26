@@ -54,8 +54,8 @@ possuem um script `dev`:
 npm run dev
 ```
 
-Atualmente, apenas a aplicação web possui esse script. O Vite disponibiliza a
-aplicação em `http://localhost:5173` por padrão.
+O Vite disponibiliza a aplicação web em `http://localhost:5173` e a API em
+`http://localhost:3333` por padrão.
 
 Para gerar todos os builds disponíveis:
 
@@ -103,8 +103,32 @@ npm run db:studio --workspace @template-web-app/db
 
 ### API
 
-O workspace `@template-web-app/api` está reservado, mas ainda não possui
-implementação ou script de execução.
+Use os scripts de conveniência da raiz para executar a API isoladamente:
+
+```bash
+npm run dev:api
+npm run build:api
+npm run start:api
+npm run typecheck:api
+```
+
+Durante o desenvolvimento, `tsx` observa alterações em `src/Server.ts`. Após o
+build, o comando `start` executa o JavaScript gerado em `dist/Server.js`.
+
+Também é possível chamar diretamente o workspace:
+
+```bash
+npm run dev --workspace @template-web-app/api
+npm run build --workspace @template-web-app/api
+npm run start --workspace @template-web-app/api
+npm run typecheck --workspace @template-web-app/api
+```
+
+Para verificar a API em execução, acesse:
+
+```text
+GET http://localhost:3333/health
+```
 
 ## Qualidade de código
 
