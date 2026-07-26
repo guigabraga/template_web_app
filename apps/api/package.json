@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch src/Server.ts",
+    "dev": "tsx watch --clear-screen=false --include \"src/**/*.ts\" --include tsconfig.json --include package.json src/Server.ts",
     "build": "tsc -p tsconfig.json",
     "start": "node dist/Server.js",
     "typecheck": "tsc --noEmit -p tsconfig.json"

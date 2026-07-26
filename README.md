@@ -81,6 +81,13 @@ iniciar as aplicações. API e web só são iniciados quando a instalação term
 com sucesso. Um volume Docker mantém o cache de downloads do npm entre
 execuções.
 
+As alterações no código são detectadas automaticamente dentro dos containers.
+A API reinicia quando um arquivo em `apps/api/src` é alterado, e o web utiliza
+o HMR do Vite para atualizar a página ao alterar `apps/web/src`. O polling está
+habilitado no ambiente `dev` para funcionar de forma consistente com o Docker
+Desktop. Depois de alterar dependências, execute novamente
+`npm run compose:dev:up` para atualizar o volume de `node_modules`.
+
 Serviços disponíveis com os valores padrão:
 
 ```text

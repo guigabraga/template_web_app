@@ -53,6 +53,7 @@ services:
       API_PORT: 1001
       DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
       CHOKIDAR_USEPOLLING: "true"
+      CHOKIDAR_INTERVAL: "300"
     ports:
       - "127.0.0.1:${API_EXTERNAL_PORT}:1001"
     depends_on:
@@ -81,7 +82,8 @@ services:
       VITE_HOST: 0.0.0.0
       VITE_PORT: 1002
       VITE_API_URL: http://localhost:${API_EXTERNAL_PORT}
-      CHOKIDAR_USEPOLLING: "true"
+      VITE_USE_POLLING: "true"
+      VITE_WATCH_INTERVAL: "300"
     ports:
       - "127.0.0.1:${WEB_EXTERNAL_PORT}:1002"
     depends_on:

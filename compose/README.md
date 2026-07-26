@@ -28,6 +28,14 @@ Ao executar `compose:dev:up`, o serviço `dependencies` roda
 os workspaces do monorepo e utiliza um volume de cache do npm para reduzir
 downloads nas próximas inicializações.
 
+O código-fonte do monorepo é montado nos containers. A API reinicia
+automaticamente ao alterar arquivos em `apps/api/src`, e o web aplica as
+alterações de `apps/web/src` pelo HMR do Vite. Os dois monitores usam polling
+no ambiente Docker para detectar alterações feitas no host.
+
+Depois de adicionar ou remover uma dependência, execute novamente
+`npm run compose:dev:up` para atualizar o volume de `node_modules`.
+
 Na raiz do projeto:
 
 ```bash
