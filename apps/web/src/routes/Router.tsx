@@ -1,4 +1,6 @@
+import { Navigate } from "react-router-dom";
 import type { ReactElement } from "react";
+import { Error, Login, NewAccess } from "../pages/public";
 
 type RouterObject = {
   path: string;
@@ -16,6 +18,17 @@ type RouterConfig = {
 };
 
 export const Router: RouterConfig = {
-  public: [],
-  private: []
-}
+  public: [
+    {
+      path: "/login",
+      available: true,
+      element: <Login />,
+    },
+    {
+      path: "*",
+      available: true,
+      element: <Navigate to="/login" replace />,
+    },
+  ],
+  private: [],
+};

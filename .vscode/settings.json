@@ -7,19 +7,16 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "always"
   },
-  "eslint.run": "onSave",
-  "eslint.useFlatConfig": true,
+  "eslint.enable": true,
+  "eslint.run": "onType",
+  "eslint.codeActionsOnSave.mode": "all",
   "eslint.validate": [
     "javascript",
     "javascriptreact",
     "typescript",
     "typescriptreact"
   ],
-  "eslint.workingDirectories": [
-    {
-      "mode": "auto"
-    }
-  ],
+  "eslint.workingDirectories": ["."],
   "files.eol": "\n",
   "prettier.requireConfig": true
 }

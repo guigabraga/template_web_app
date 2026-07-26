@@ -122,3 +122,20 @@ Para aplicar correções:
 npm run lint:fix
 npm run format
 ```
+
+### VS Code
+
+Abra a raiz do monorepo no VS Code, e não apenas um workspace interno:
+
+```bash
+code .
+```
+
+Aceite a recomendação para instalar as extensões ESLint e Prettier. As
+configurações em `.vscode/settings.json` mostram os problemas do ESLint durante
+a edição e aplicam as correções disponíveis ao salvar. Não é necessário alterar
+o `settings.json` global do VS Code.
+
+Se a pasta já estava aberta antes da instalação ou alteração das extensões,
+execute `Developer: Reload Window` e depois `ESLint: Restart ESLint Server` pela
+paleta de comandos.
