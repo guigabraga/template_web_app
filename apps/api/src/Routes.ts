@@ -1,5 +1,6 @@
 import { Router, type Response } from "express";
 import { uptime } from "node:process";
+import { GetAuth, PostAuth } from "./controllers/Auth.js";
 
 const Routes = Router();
 
