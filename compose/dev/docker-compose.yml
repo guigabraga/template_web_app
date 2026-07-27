@@ -44,6 +44,19 @@ services:
     networks:
       - application
 
+  database:
+    <<: *node-service
+    command: npm run db:setup:dev
+    restart: "no"
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+    depends_on:
+      dependencies:
+        condition: service_completed_successfully
+      postgres:
+        condition: service_healthy
+
   api:
     <<: *node-service
     command: npm run dev:api
@@ -57,10 +70,8 @@ services:
     ports:
       - "127.0.0.1:${API_EXTERNAL_PORT}:1001"
     depends_on:
-      dependencies:
+      database:
         condition: service_completed_successfully
-      postgres:
-        condition: service_healthy
     healthcheck:
       test:
         [

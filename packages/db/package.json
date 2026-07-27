@@ -22,11 +22,13 @@
     "db:migrate": "prisma migrate dev",
     "db:migrate:create": "prisma migrate dev --create-only",
     "db:migrate:deploy": "prisma migrate deploy",
+    "db:seed": "prisma db seed",
     "db:studio": "prisma studio"
   },
   "dependencies": {
     "@prisma/adapter-pg": "^7.9.0",
     "@prisma/client": "^7.9.0",
+    "bcryptjs": "^3.0.2",
     "pg": "^8.16.3"
   },
   "devDependencies": {
@@ -34,6 +36,7 @@
     "@types/pg": "^8.15.5",
     "dotenv": "^17.2.3",
     "prisma": "^7.9.0",
+    "tsx": "^4.20.6",
     "typescript": "^6.0.3"
   }
 }

@@ -146,13 +146,18 @@ npm run db:generate
 npm run db:migrate:create -- --name nome_da_migration
 npm run db:migrate
 npm run db:migrate:deploy
+npm run db:seed
 npm run db:studio
 ```
 
 `db:migrate:create` gera o arquivo SQL sem aplicá-lo. `db:migrate` cria e aplica
-migrations no desenvolvimento, e `db:migrate:deploy` aplica migrations já
-existentes. Neste momento o schema não possui models e nenhuma tabela da
-aplicação é criada.
+migrations no desenvolvimento, `db:migrate:deploy` aplica migrations já
+existentes e `db:seed` executa a seed configurada.
+
+Ao subir o Docker dev, o serviço `database` verifica e aplica migrations
+pendentes antes de iniciar a API. Em seguida, a seed idempotente garante o
+usuário inicial `admin`, com nome `Admin` e senha inicial `admin`. A senha é
+armazenada como hash e não é redefinida quando o usuário já existe.
 
 Os mesmos comandos podem ser executados diretamente no workspace:
 
@@ -161,6 +166,7 @@ npm run generate --workspace @template-web-app/db
 npm run db:migrate:create --workspace @template-web-app/db -- --name nome_da_migration
 npm run db:migrate --workspace @template-web-app/db
 npm run db:migrate:deploy --workspace @template-web-app/db
+npm run db:seed --workspace @template-web-app/db
 npm run db:studio --workspace @template-web-app/db
 ```
 

@@ -28,6 +28,15 @@ Ao executar `compose:dev:up`, o serviço `dependencies` roda
 os workspaces do monorepo e utiliza um volume de cache do npm para reduzir
 downloads nas próximas inicializações.
 
+Depois que o PostgreSQL fica saudável, o serviço `database` executa
+`prisma migrate deploy` para aplicar somente migrations pendentes e roda a seed
+idempotente do ambiente dev. A API só inicia quando essa etapa termina com
+sucesso.
+
+Na primeira inicialização, a seed cria o usuário `admin`, com nome `Admin` e
+senha inicial `admin`. A senha é armazenada como hash e não é redefinida nas
+inicializações seguintes.
+
 O código-fonte do monorepo é montado nos containers. A API reinicia
 automaticamente ao alterar arquivos em `apps/api/src`, e o web aplica as
 alterações de `apps/web/src` pelo HMR do Vite. Os dois monitores usam polling
