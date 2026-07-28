@@ -23,6 +23,9 @@ export default function AppThemeProvider({ children }: PropsWithChildren) {
         palette: {
           mode: resolvedMode,
         },
+        typography: {
+          fontFamily: '"Roboto Variable", Roboto, sans-serif',
+        },
       }),
     [resolvedMode],
   );
