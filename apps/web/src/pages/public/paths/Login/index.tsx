@@ -1,16 +1,17 @@
 import VisibilityOffRoundedIcon from "@mui/icons-material/VisibilityOffRounded";
 import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
-import { Box, IconButton } from "@mui/material";
+import { Alert, Box, IconButton } from "@mui/material";
 import { useState, type MouseEvent } from "react";
 import { Controller } from "react-hook-form";
 import { Button, Input } from "../../../../components";
 import { type TLoginFormData, useLoginForm, useLoginMutation } from "../../../../hooks/login";
 
-export default function Login() {
+const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const {
     control,
     handleSubmit,
+    reset,
     formState: { isSubmitting, isValid },
   } = useLoginForm();
   const loginMutation = useLoginMutation();
@@ -24,7 +25,16 @@ export default function Login() {
     event.preventDefault();
   };
 
-  const handleLogin = (data: TLoginFormData) => loginMutation.mutate(data);
+  const handleLogin = (data: TLoginFormData) => {
+    loginMutation.mutate(data, {
+      onSuccess: () => {
+        reset({
+          user: data.user,
+          pass: "",
+        });
+      },
+    });
+  };
 
   return (
     <Box
@@ -109,7 +119,15 @@ export default function Login() {
         <Button type="submit" size="large" fullWidth disabled={!isValid} loading={isLoading}>
           Acessar
         </Button>
+
+        {loginMutation.isError && <Alert severity="error">{loginMutation.error.message}</Alert>}
+
+        {loginMutation.isSuccess && loginMutation.data.status && (
+          <Alert severity="success">{loginMutation.data.message}</Alert>
+        )}
       </Box>
     </Box>
   );
-}
+};
+
+export default Login;

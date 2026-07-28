@@ -25,6 +25,7 @@ const webPort = isDocker ? "1002" : (process.env.WEB_EXTERNAL_PORT ?? "3002");
 setDefault("NODE_ENV", "development");
 setDefault("API_HOST", isDocker ? "0.0.0.0" : "127.0.0.1");
 setDefault("API_PORT", apiPort);
+setDefault("CORS_ORIGIN", `http://localhost:${process.env.WEB_EXTERNAL_PORT ?? "3002"}`);
 setDefault("VITE_HOST", isDocker ? "0.0.0.0" : "127.0.0.1");
 setDefault("VITE_PORT", webPort);
 setDefault("VITE_API_URL", `http://localhost:${process.env.API_EXTERNAL_PORT ?? "3001"}`);
