@@ -1,29 +1,29 @@
-import { postAuthBodySchema, type PostAuthBody, type PostAuthResponse } from "@template-web-app/shared-types/auth";
+import { postAuthBodySchema, type TPostAuthBody, type TPostAuthResponse } from "@template-web-app/shared-types/auth";
 
-export type AuthHttpMethods = {
+export type TAuthHttpMethods = {
   fetch: typeof globalThis.fetch;
 };
 
-export type AuthConfig = {
+export type TAuthConfig = {
   baseUrl: string;
-  methods?: AuthHttpMethods;
+  methods?: TAuthHttpMethods;
 };
 
 export class Auth {
   private readonly baseUrl: string;
-  private readonly methods: AuthHttpMethods;
+  private readonly methods: TAuthHttpMethods;
 
   constructor({
     baseUrl,
     methods = {
       fetch: globalThis.fetch.bind(globalThis),
     },
-  }: AuthConfig) {
+  }: TAuthConfig) {
     this.baseUrl = baseUrl.replace(/\/+$/, "");
     this.methods = methods;
   }
 
-  post = async (body: PostAuthBody): Promise<PostAuthResponse> => {
+  post = async (body: TPostAuthBody): Promise<TPostAuthResponse> => {
     try {
       const payload = postAuthBodySchema.parse(body);
       const response = await this.methods.fetch(`${this.baseUrl}/auth`, {
@@ -33,7 +33,7 @@ export class Auth {
         },
         body: JSON.stringify(payload),
       });
-      const result = (await response.json()) as PostAuthResponse;
+      const result = (await response.json()) as TPostAuthResponse;
 
       if (!response.ok || !result.status) {
         throw new Error(result.message || `Não foi possível autenticar. Status: ${response.status}.`);

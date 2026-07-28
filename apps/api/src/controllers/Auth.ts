@@ -1,10 +1,14 @@
-import type { HttpResponse, PostAuthBody } from "@template-web-app/shared-types/auth";
+import type { THttpResponse, TPostAuthBody } from "@template-web-app/shared-types/auth";
 import type { Request, Response } from "express";
 
-type PostAuthRequest = Request<Record<string, never>, HttpResponse, PostAuthBody>;
-type PostAuthResponse = Response<HttpResponse>;
-type PostAuthController = (request: PostAuthRequest, response: PostAuthResponse) => Promise<void>;
+type TPostAuthRequest = Request<Record<string, never>, THttpResponse, TPostAuthBody>;
+type TPostAuthResponse = Response<THttpResponse>;
+type TPostAuthController = (request: TPostAuthRequest, response: TPostAuthResponse) => Promise<void>;
 
-const PostAuth: PostAuthController = async () => {};
+const PostAuthController: TPostAuthController = async (req, _res) => {
+  const body = req.body;
+  void _res;
+  void body;
+};
 
-export { PostAuth };
+export { PostAuthController };

@@ -1,3 +1,3 @@
-export { default as Button, type ButtonProps, type ButtonSize } from "./Button";
-export { default as DropMenu, type DropMenuItem, type DropMenuProps } from "./DropMenu";
-export { default as Input, type InputProps, type InputSize, type InputType } from "./Input";
+export { default as Button, type TButtonProps, type TButtonSize } from "./Button";
+export { default as DropMenu, type TDropMenuItem, type TDropMenuProps } from "./DropMenu";
+export { default as Input, type TInputProps, type TInputSize, type TInputType } from "./Input";

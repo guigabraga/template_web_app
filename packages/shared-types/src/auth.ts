@@ -13,22 +13,22 @@ export const postAuthBodySchema = z
   })
   .strict();
 
-export type PostAuthBody = z.infer<typeof postAuthBodySchema>;
+export type TPostAuthBody = z.infer<typeof postAuthBodySchema>;
 
-export type HttpResponseSuccess<TData = undefined> = {
+export type THttpResponseSuccess<TData = undefined> = {
   status: true;
   message: string;
   data: TData;
 };
 
-export type HttpResponseError<TData = undefined> = {
+export type THttpResponseError<TData = undefined> = {
   status: false;
   errorType: string;
   message: string;
   data: TData;
 };
 
-export type HttpResponse<TSuccessData = undefined, TErrorData = undefined> =
-  HttpResponseSuccess<TSuccessData> | HttpResponseError<TErrorData>;
+export type THttpResponse<TSuccessData = undefined, TErrorData = undefined> =
+  THttpResponseSuccess<TSuccessData> | THttpResponseError<TErrorData>;
 
-export type PostAuthResponse = HttpResponse;
+export type TPostAuthResponse = THttpResponse;

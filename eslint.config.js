@@ -35,6 +35,25 @@ export default defineConfig([
   prettierRecommended,
   {
     rules: {
+      "@typescript-eslint/naming-convention": [
+        "error",
+        {
+          selector: "typeAlias",
+          format: ["PascalCase"],
+          custom: {
+            regex: "^T[A-Z]",
+            match: true,
+          },
+        },
+        {
+          selector: "interface",
+          format: ["PascalCase"],
+          custom: {
+            regex: "^I[A-Z]",
+            match: true,
+          },
+        },
+      ],
       "prettier/prettier": [
         "error",
         {

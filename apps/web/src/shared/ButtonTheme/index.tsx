@@ -2,11 +2,11 @@ import ComputerRoundedIcon from "@mui/icons-material/ComputerRounded";
 import DarkModeRoundedIcon from "@mui/icons-material/DarkModeRounded";
 import LightModeRoundedIcon from "@mui/icons-material/LightModeRounded";
 import type { ReactNode } from "react";
-import { DropMenu, type DropMenuItem } from "../../components";
+import { DropMenu, type TDropMenuItem } from "../../components";
 import { useThemeStore } from "../../stores";
-import type { ThemeMode } from "../../types";
+import type { TThemeMode } from "../../types";
 
-const themeIcons: Record<ThemeMode, ReactNode> = {
+const themeIcons: Record<TThemeMode, ReactNode> = {
   dark: <DarkModeRoundedIcon />,
   light: <LightModeRoundedIcon />,
   system: <ComputerRoundedIcon />,
@@ -16,7 +16,7 @@ export default function ButtonTheme() {
   const mode = useThemeStore((state) => state.mode);
   const setMode = useThemeStore((state) => state.setMode);
 
-  const items: DropMenuItem[] = [
+  const items: TDropMenuItem[] = [
     {
       id: "dark",
       label: "Escuro",

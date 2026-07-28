@@ -1,13 +1,13 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import type { ThemeMode } from "../../types";
+import type { TThemeMode } from "../../types";
 
-type ThemeStore = {
-  mode: ThemeMode;
-  setMode: (mode: ThemeMode) => void;
+type TThemeStore = {
+  mode: TThemeMode;
+  setMode: (mode: TThemeMode) => void;
 };
 
-export const useThemeStore = create<ThemeStore>()(
+export const useThemeStore = create<TThemeStore>()(
   persist(
     (set) => ({
       mode: "system",

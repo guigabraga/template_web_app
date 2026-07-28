@@ -1,12 +1,12 @@
 import { alpha, InputAdornment, TextField, type TextFieldProps } from "@mui/material";
 import { useState, type ChangeEvent, type ReactNode } from "react";
 
-export type InputType = "text" | "number" | "email" | "password" | "phone" | "free";
-export type InputSize = "small" | "default" | "large";
+export type TInputType = "text" | "number" | "email" | "password" | "phone" | "free";
+export type TInputSize = "small" | "default" | "large";
 
-type BaseInputProps = {
+type TBaseInputProps = {
   placeholder: string;
-  size?: InputSize;
+  size?: TInputSize;
   icon?: ReactNode;
   iconPosition?: "start" | "end";
   value?: string;
@@ -27,19 +27,19 @@ type BaseInputProps = {
   onFocus?: TextFieldProps["onFocus"];
 };
 
-type StandardInputProps = BaseInputProps & {
-  type?: Exclude<InputType, "free">;
+type TStandardInputProps = TBaseInputProps & {
+  type?: Exclude<TInputType, "free">;
   regex?: never;
 };
 
-type FreeInputProps = BaseInputProps & {
+type TFreeInputProps = TBaseInputProps & {
   type: "free";
   regex: RegExp;
 };
 
-export type InputProps = StandardInputProps | FreeInputProps;
+export type TInputProps = TStandardInputProps | TFreeInputProps;
 
-const inputFontSizes: Record<InputSize, string> = {
+const inputFontSizes: Record<TInputSize, string> = {
   small: "12px",
   default: "14px",
   large: "18px",
@@ -78,7 +78,7 @@ function matchesRegex(value: string, regex: RegExp) {
   return matches;
 }
 
-function formatValue(type: InputType, value: string) {
+function formatValue(type: TInputType, value: string) {
   return type === "phone" ? formatPhone(value) : value;
 }
 
@@ -97,7 +97,7 @@ export default function Input({
   disabled = false,
   loading = false,
   ...props
-}: InputProps) {
+}: TInputProps) {
   const [internalValue, setInternalValue] = useState(() => formatValue(type, defaultValue));
   const displayValue = formatValue(type, value ?? internalValue);
   const htmlType = type === "phone" ? "tel" : type === "free" ? "text" : type;

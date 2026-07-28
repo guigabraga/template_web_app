@@ -4,7 +4,7 @@ import { Box, IconButton } from "@mui/material";
 import { useState, type MouseEvent } from "react";
 import { Controller } from "react-hook-form";
 import { Button, Input } from "../../../../components";
-import { type LoginFormData, useLoginForm, useLoginMutation } from "../../../../hooks/login";
+import { type TLoginFormData, useLoginForm, useLoginMutation } from "../../../../hooks/login";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -24,7 +24,7 @@ export default function Login() {
     event.preventDefault();
   };
 
-  const handleLogin = (data: LoginFormData) => loginMutation.mutate(data);
+  const handleLogin = (data: TLoginFormData) => loginMutation.mutate(data);
 
   return (
     <Box

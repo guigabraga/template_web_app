@@ -2,7 +2,7 @@ import MoreVertRoundedIcon from "@mui/icons-material/MoreVertRounded";
 import { IconButton, ListItemIcon, ListItemText, Menu, MenuItem } from "@mui/material";
 import { useId, useState, type MouseEvent, type ReactNode } from "react";
 
-export type DropMenuItem = {
+export type TDropMenuItem = {
   id: string;
   label: ReactNode;
   icon?: ReactNode;
@@ -11,12 +11,12 @@ export type DropMenuItem = {
   onClick?: () => void;
 };
 
-export type DropMenuProps = {
-  items: readonly DropMenuItem[];
+export type TDropMenuProps = {
+  items: readonly TDropMenuItem[];
   triggerIcon?: ReactNode;
 };
 
-export default function DropMenu({ items, triggerIcon = <MoreVertRoundedIcon /> }: DropMenuProps) {
+export default function DropMenu({ items, triggerIcon = <MoreVertRoundedIcon /> }: TDropMenuProps) {
   const menuId = useId();
   const [anchorElement, setAnchorElement] = useState<HTMLButtonElement | null>(null);
   const isOpen = Boolean(anchorElement);
@@ -29,7 +29,7 @@ export default function DropMenu({ items, triggerIcon = <MoreVertRoundedIcon /> 
     setAnchorElement(null);
   };
 
-  const handleItemClick = (item: DropMenuItem) => {
+  const handleItemClick = (item: TDropMenuItem) => {
     handleClose();
     item.onClick?.();
   };

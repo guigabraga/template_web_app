@@ -1,1 +1,1 @@
-export { Auth, authService, type AuthConfig, type AuthHttpMethods } from "./Auth";
+export { Auth, authService, type TAuthConfig, type TAuthHttpMethods } from "./Auth";

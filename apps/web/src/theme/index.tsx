@@ -2,7 +2,7 @@ import { CssBaseline, useMediaQuery } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useMemo, type PropsWithChildren } from "react";
 import { useThemeStore } from "../stores";
-import type { ResolvedThemeMode } from "../types";
+import type { TResolvedThemeMode } from "../types";
 
 export default function AppThemeProvider({ children }: PropsWithChildren) {
   const selectedMode = useThemeStore((state) => state.mode);
@@ -10,7 +10,7 @@ export default function AppThemeProvider({ children }: PropsWithChildren) {
     noSsr: true,
   });
 
-  const resolvedMode: ResolvedThemeMode =
+  const resolvedMode: TResolvedThemeMode =
     selectedMode === "system" ? (systemPrefersDark ? "dark" : "light") : selectedMode;
 
   const theme = useMemo(

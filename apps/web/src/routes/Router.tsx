@@ -2,7 +2,7 @@ import { Navigate } from "react-router-dom";
 import type { ReactElement } from "react";
 import { Login } from "../pages/public/paths";
 
-type RouterObject = {
+type TRouterObject = {
   path: string;
   available: boolean;
   element: ReactElement;
@@ -12,12 +12,12 @@ type RouterObject = {
   panel?: "admin" | "agent" | "general";
 };
 
-type RouterConfig = {
-  public: RouterObject[];
-  private: RouterObject[];
+type TRouterConfig = {
+  public: TRouterObject[];
+  private: TRouterObject[];
 };
 
-export const Router: RouterConfig = {
+export const Router: TRouterConfig = {
   public: [
     {
       path: "/login",

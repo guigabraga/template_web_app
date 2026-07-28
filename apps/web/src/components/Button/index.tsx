@@ -1,20 +1,20 @@
 import { alpha, Button as MaterialButton, type ButtonProps as MaterialButtonProps } from "@mui/material";
 
-import type { InputSize } from "../Input";
+import type { TInputSize } from "../Input";
 
-export type ButtonSize = InputSize;
+export type TButtonSize = TInputSize;
 
-export type ButtonProps = Omit<
+export type TButtonProps = Omit<
   MaterialButtonProps,
   "color" | "disabled" | "fullWidth" | "loading" | "size" | "sx" | "variant"
 > & {
-  size?: ButtonSize;
+  size?: TButtonSize;
   fullWidth?: boolean;
   disabled?: boolean;
   loading?: boolean;
 };
 
-const fontSizes: Record<ButtonSize, string> = {
+const fontSizes: Record<TButtonSize, string> = {
   small: "12px",
   default: "14px",
   large: "18px",
@@ -27,7 +27,7 @@ export default function Button({
   disabled = false,
   loading = false,
   ...props
-}: ButtonProps) {
+}: TButtonProps) {
   return (
     <MaterialButton
       {...props}

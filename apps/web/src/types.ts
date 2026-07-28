@@ -1,2 +1,2 @@
-export type ThemeMode = "light" | "dark" | "system";
-export type ResolvedThemeMode = Exclude<ThemeMode, "system">;
+export type TThemeMode = "light" | "dark" | "system";
+export type TResolvedThemeMode = Exclude<TThemeMode, "system">;
