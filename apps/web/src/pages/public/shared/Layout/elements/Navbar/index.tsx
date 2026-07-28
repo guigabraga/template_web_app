@@ -1,4 +1,5 @@
 import { AppBar, Container, Toolbar } from "@mui/material";
+import { ButtonTheme } from "../../../../../../shared";
 
 export default function Navbar() {
   return (
@@ -14,7 +15,9 @@ export default function Navbar() {
       }}
     >
       <Container maxWidth="lg">
-        <Toolbar disableGutters></Toolbar>
+        <Toolbar disableGutters sx={{ justifyContent: "flex-end" }}>
+          <ButtonTheme />
+        </Toolbar>
       </Container>
     </AppBar>
   );
