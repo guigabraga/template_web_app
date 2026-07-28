@@ -4,15 +4,14 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "predev": "npm run build --workspace @template-web-app/db",
-    "dev": "tsx watch --clear-screen=false --include \"src/**/*.ts\" --include tsconfig.json --include package.json src/Server.ts",
-    "prebuild": "npm run build --workspace @template-web-app/db",
+    "dev": "tsx watch --clear-screen=false --include \"src/**/*.ts\" --include \"../../packages/db/dist/**/*.js\" --include \"../../packages/shared-types/dist/**/*.js\" --include tsconfig.json --include package.json src/Server.ts",
     "build": "tsc -p tsconfig.json",
     "start": "node dist/Server.js",
     "typecheck": "tsc --noEmit -p tsconfig.json"
   },
   "dependencies": {
     "@template-web-app/db": "*",
+    "@template-web-app/shared-types": "*",
     "express": "^5.2.1",
     "zod": "^4.4.3"
   },

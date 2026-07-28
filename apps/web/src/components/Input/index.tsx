@@ -1,13 +1,7 @@
-import {
-  alpha,
-  InputAdornment,
-  TextField,
-  type TextFieldProps,
-} from "@mui/material";
+import { alpha, InputAdornment, TextField, type TextFieldProps } from "@mui/material";
 import { useState, type ChangeEvent, type ReactNode } from "react";
 
-export type InputType =
-  "text" | "number" | "email" | "password" | "phone" | "free";
+export type InputType = "text" | "number" | "email" | "password" | "phone" | "free";
 export type InputSize = "small" | "default" | "large";
 
 type BaseInputProps = {
@@ -104,26 +98,16 @@ export default function Input({
   loading = false,
   ...props
 }: InputProps) {
-  const [internalValue, setInternalValue] = useState(() =>
-    formatValue(type, defaultValue),
-  );
+  const [internalValue, setInternalValue] = useState(() => formatValue(type, defaultValue));
   const displayValue = formatValue(type, value ?? internalValue);
   const htmlType = type === "phone" ? "tel" : type === "free" ? "text" : type;
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const enteredValue = event.target.value;
-    const rawValue =
-      type === "phone"
-        ? enteredValue.replace(/\D/g, "").slice(0, 11)
-        : enteredValue;
+    const rawValue = type === "phone" ? enteredValue.replace(/\D/g, "").slice(0, 11) : enteredValue;
     const nextValue = formatValue(type, rawValue);
 
-    if (
-      type === "free" &&
-      regex &&
-      nextValue !== "" &&
-      !matchesRegex(nextValue, regex)
-    ) {
+    if (type === "free" && regex && nextValue !== "" && !matchesRegex(nextValue, regex)) {
       return;
     }
 
@@ -150,24 +134,13 @@ export default function Input({
       slotProps={{
         input: {
           startAdornment:
-            icon && iconPosition === "start" ? (
-              <InputAdornment position="start">{icon}</InputAdornment>
-            ) : undefined,
+            icon && iconPosition === "start" ? <InputAdornment position="start">{icon}</InputAdornment> : undefined,
           endAdornment:
-            icon && iconPosition === "end" ? (
-              <InputAdornment position="end">{icon}</InputAdornment>
-            ) : undefined,
+            icon && iconPosition === "end" ? <InputAdornment position="end">{icon}</InputAdornment> : undefined,
         },
         htmlInput: {
           "aria-label": placeholder,
-          inputMode:
-            type === "number"
-              ? "decimal"
-              : type === "phone"
-                ? "tel"
-                : type === "email"
-                  ? "email"
-                  : "text",
+          inputMode: type === "number" ? "decimal" : type === "phone" ? "tel" : type === "email" ? "email" : "text",
           maxLength: type === "phone" ? 15 : undefined,
           pattern: type === "free" ? regex?.source : undefined,
           step: type === "number" ? "any" : undefined,
@@ -178,14 +151,8 @@ export default function Input({
           borderRadius: 999,
           fontSize: inputFontSizes[size],
           ...(loading && {
-            "--input-loading-background-start": alpha(
-              theme.palette.text.primary,
-              0.035,
-            ),
-            "--input-loading-background-end": alpha(
-              theme.palette.text.primary,
-              0.075,
-            ),
+            "--input-loading-background-start": alpha(theme.palette.text.primary, 0.035),
+            "--input-loading-background-end": alpha(theme.palette.text.primary, 0.075),
             animation: "inputLoadingPulse 1.5s ease-in-out infinite",
             bgcolor: "var(--input-loading-background-start)",
             "& input.Mui-disabled": {

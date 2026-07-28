@@ -17,6 +17,7 @@ packages/db/src/generated/prisma/
 .env
 .env.*
 !.env.example
+compose/*/.certs/
 *.local
 
 # Logs

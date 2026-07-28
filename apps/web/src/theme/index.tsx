@@ -11,11 +11,7 @@ export default function AppThemeProvider({ children }: PropsWithChildren) {
   });
 
   const resolvedMode: ResolvedThemeMode =
-    selectedMode === "system"
-      ? systemPrefersDark
-        ? "dark"
-        : "light"
-      : selectedMode;
+    selectedMode === "system" ? (systemPrefersDark ? "dark" : "light") : selectedMode;
 
   const theme = useMemo(
     () =>

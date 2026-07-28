@@ -4,11 +4,7 @@ import { Box, IconButton } from "@mui/material";
 import { useState, type MouseEvent } from "react";
 import { Controller } from "react-hook-form";
 import { Button, Input } from "../../../../components";
-import {
-  type LoginFormData,
-  useLoginForm,
-  useLoginMutation,
-} from "../../../../hooks/login";
+import { type LoginFormData, useLoginForm, useLoginMutation } from "../../../../hooks/login";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -28,7 +24,7 @@ export default function Login() {
     event.preventDefault();
   };
 
-  const handleLogin = (data: LoginFormData) => loginMutation.mutateAsync(data);
+  const handleLogin = (data: LoginFormData) => loginMutation.mutate(data);
 
   return (
     <Box
@@ -54,7 +50,7 @@ export default function Login() {
         }}
       >
         <Controller
-          name="login"
+          name="user"
           control={control}
           render={({ field, fieldState }) => (
             <Input
@@ -77,7 +73,7 @@ export default function Login() {
         />
 
         <Controller
-          name="password"
+          name="pass"
           control={control}
           render={({ field, fieldState }) => (
             <Input
@@ -102,11 +98,7 @@ export default function Login() {
                   onClick={handlePasswordVisibility}
                   onMouseDown={handlePasswordMouseDown}
                 >
-                  {showPassword ? (
-                    <VisibilityOffRoundedIcon />
-                  ) : (
-                    <VisibilityRoundedIcon />
-                  )}
+                  {showPassword ? <VisibilityOffRoundedIcon /> : <VisibilityRoundedIcon />}
                 </IconButton>
               }
               required
@@ -114,13 +106,7 @@ export default function Login() {
           )}
         />
 
-        <Button
-          type="submit"
-          size="large"
-          fullWidth
-          disabled={!isValid}
-          loading={isLoading}
-        >
+        <Button type="submit" size="large" fullWidth disabled={!isValid} loading={isLoading}>
           Acessar
         </Button>
       </Box>

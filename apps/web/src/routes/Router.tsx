@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import type { ReactElement } from "react";
-import { Error, Login, NewAccess } from "../pages/public/paths";
+import { Login } from "../pages/public/paths";
 
 type RouterObject = {
   path: string;

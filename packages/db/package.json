@@ -18,6 +18,7 @@
   "scripts": {
     "generate": "prisma generate",
     "build": "npm run generate && tsc -p tsconfig.json",
+    "dev": "node scripts/watch.mjs",
     "typecheck": "npm run generate && tsc --noEmit -p tsconfig.json",
     "db:migrate": "prisma migrate dev",
     "db:migrate:create": "prisma migrate dev --create-only",

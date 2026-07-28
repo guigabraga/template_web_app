@@ -1,6 +1,18 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "globalEnv": ["DATABASE_URL"],
+  "globalEnv": [
+    "API_HOST",
+    "API_PORT",
+    "CHOKIDAR_INTERVAL",
+    "CHOKIDAR_USEPOLLING",
+    "DATABASE_URL",
+    "NODE_ENV",
+    "VITE_API_URL",
+    "VITE_HOST",
+    "VITE_PORT",
+    "VITE_USE_POLLING",
+    "VITE_WATCH_INTERVAL"
+  ],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],

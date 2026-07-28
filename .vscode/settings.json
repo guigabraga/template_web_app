@@ -10,12 +10,7 @@
   "eslint.enable": true,
   "eslint.run": "onType",
   "eslint.codeActionsOnSave.mode": "all",
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact"
-  ],
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "eslint.workingDirectories": ["."],
   "files.eol": "\n",
   "prettier.requireConfig": true

@@ -17,6 +17,7 @@
     "@mui/icons-material": "^9.2.0",
     "@mui/material": "^9.2.0",
     "@tanstack/react-query": "^5.101.4",
+    "@template-web-app/shared-types": "*",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-hook-form": "^7.83.0",

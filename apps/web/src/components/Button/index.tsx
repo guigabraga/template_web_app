@@ -1,8 +1,4 @@
-import {
-  alpha,
-  Button as MaterialButton,
-  type ButtonProps as MaterialButtonProps,
-} from "@mui/material";
+import { alpha, Button as MaterialButton, type ButtonProps as MaterialButtonProps } from "@mui/material";
 
 import type { InputSize } from "../Input";
 
@@ -46,18 +42,12 @@ export default function Button({
         const backgroundColor = isDarkMode ? "#f5f5f0" : "#000000";
         const foregroundColor = isDarkMode ? "#111111" : "#ffffff";
         const hoverBackgroundColor = isDarkMode ? "#e5e5df" : "#202020";
-        const disabledBackgroundColor = isDarkMode
-          ? theme.palette.grey[300]
-          : theme.palette.grey[800];
+        const disabledBackgroundColor = isDarkMode ? theme.palette.grey[300] : theme.palette.grey[800];
         const disabledForegroundColor = isDarkMode
           ? alpha(theme.palette.common.black, 0.6)
           : alpha(theme.palette.common.white, 0.7);
-        const loadingStartBackgroundColor = isDarkMode
-          ? "#d6d6d2"
-          : disabledBackgroundColor;
-        const loadingBackgroundColor = isDarkMode
-          ? "#ccccc8"
-          : theme.palette.grey[700];
+        const loadingStartBackgroundColor = isDarkMode ? "#d6d6d2" : disabledBackgroundColor;
+        const loadingBackgroundColor = isDarkMode ? "#ccccc8" : theme.palette.grey[700];
 
         return {
           minHeight: 40,

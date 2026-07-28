@@ -1,7 +1,10 @@
-import type { Response, Request } from "express";
+import type { HttpResponse, PostAuthBody } from "@template-web-app/shared-types/auth";
+import type { Request, Response } from "express";
 
-const GetAuth = async () => { };
+type PostAuthRequest = Request<Record<string, never>, HttpResponse, PostAuthBody>;
+type PostAuthResponse = Response<HttpResponse>;
+type PostAuthController = (request: PostAuthRequest, response: PostAuthResponse) => Promise<void>;
 
-const PostAuth = async () => { };
+const PostAuth: PostAuthController = async () => {};
 
-export { GetAuth, PostAuth };
+export { PostAuth };

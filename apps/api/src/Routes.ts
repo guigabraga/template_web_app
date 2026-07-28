@@ -1,6 +1,6 @@
 import { Router, type Response } from "express";
 import { uptime } from "node:process";
-import { GetAuth, PostAuth } from "./controllers/Auth.js";
+import { PostAuth } from "./controllers/Auth.js";
 
 const Routes = Router();
 
@@ -14,5 +14,7 @@ Routes.get("/health", (_, res: Response) => {
     },
   });
 });
+
+Routes.post("/auth", PostAuth);
 
 export default Routes;

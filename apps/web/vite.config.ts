@@ -6,9 +6,12 @@ const watchInterval = Number(process.env.VITE_WATCH_INTERVAL ?? 300);
 
 export default defineConfig({
   plugins: [react()],
+  optimizeDeps: {
+    exclude: ["@template-web-app/shared-types"],
+  },
   server: {
     host: process.env.VITE_HOST ?? "127.0.0.1",
-    port: 1002,
+    port: Number(process.env.VITE_PORT ?? 1002),
     strictPort: true,
     watch: {
       usePolling,
