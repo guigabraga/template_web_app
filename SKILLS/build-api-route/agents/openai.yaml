@@ -1,0 +1,4 @@
+interface:
+  display_name: "Construir rota da API"
+  short_description: "Padroniza rotas e camadas da API"
+  default_prompt: "Use $build-api-route para implementar uma rota da API seguindo as camadas e convenções do monorepo."
