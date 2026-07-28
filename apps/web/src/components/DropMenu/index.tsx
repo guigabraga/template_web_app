@@ -43,6 +43,9 @@ export default function DropMenu({ items, triggerIcon = <MoreVertRoundedIcon /> 
         aria-haspopup="menu"
         disabled={items.length === 0}
         onClick={handleOpen}
+        sx={(theme) => ({
+          color: theme.palette.mode === "light" ? theme.palette.common.black : theme.palette.text.primary,
+        })}
       >
         {triggerIcon}
       </IconButton>
@@ -82,6 +85,11 @@ export default function DropMenu({ items, triggerIcon = <MoreVertRoundedIcon /> 
             sx={{
               mt: index === 0 ? 0 : 0.5,
               borderRadius: 1,
+              color: (theme) =>
+                theme.palette.mode === "light" ? theme.palette.common.black : theme.palette.text.primary,
+              "& .MuiListItemIcon-root": {
+                color: "inherit",
+              },
             }}
           >
             {item.icon ? <ListItemIcon>{item.icon}</ListItemIcon> : null}

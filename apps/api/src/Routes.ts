@@ -4,7 +4,9 @@ import { uptime } from "node:process";
 import { PostAuthController } from "./controllers/Auth.js";
 
 const Routes = Router();
-const allowedOrigins = (process.env.CORS_ORIGIN ?? "http://localhost:3002").split(",").map((origin) => origin.trim());
+const allowedOrigins = (process.env.CORS_ORIGIN ?? "http://localhost:3002,http://127.0.0.1:3002")
+  .split(",")
+  .map((origin) => origin.trim());
 
 Routes.use(
   cors({

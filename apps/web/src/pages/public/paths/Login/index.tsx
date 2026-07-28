@@ -1,9 +1,9 @@
 import VisibilityOffRoundedIcon from "@mui/icons-material/VisibilityOffRounded";
 import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
-import { Alert, Box, IconButton } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import { useState, type MouseEvent } from "react";
 import { Controller } from "react-hook-form";
-import { Button, Input } from "../../../../components";
+import { Alert, Button, Input } from "../../../../components";
 import { type TLoginFormData, useLoginForm, useLoginMutation } from "../../../../hooks/login";
 
 const Login = () => {
@@ -116,15 +116,21 @@ const Login = () => {
           )}
         />
 
+        {loginMutation.isError && (
+          <Alert type="error" onClose={loginMutation.reset}>
+            {loginMutation.error.message}
+          </Alert>
+        )}
+
+        {loginMutation.isSuccess && loginMutation.data.status && (
+          <Alert type="success" onClose={loginMutation.reset}>
+            {loginMutation.data.message}
+          </Alert>
+        )}
+
         <Button type="submit" size="large" fullWidth disabled={!isValid} loading={isLoading}>
           Acessar
         </Button>
-
-        {loginMutation.isError && <Alert severity="error">{loginMutation.error.message}</Alert>}
-
-        {loginMutation.isSuccess && loginMutation.data.status && (
-          <Alert severity="success">{loginMutation.data.message}</Alert>
-        )}
       </Box>
     </Box>
   );
