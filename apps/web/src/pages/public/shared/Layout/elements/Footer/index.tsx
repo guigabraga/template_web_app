@@ -12,8 +12,6 @@ export default function Footer() {
         bottom: 0,
         left: 0,
         height: { xs: 48, sm: 52 },
-        borderTop: 1,
-        borderColor: "divider",
         zIndex: (theme) => theme.zIndex.appBar,
       }}
     >

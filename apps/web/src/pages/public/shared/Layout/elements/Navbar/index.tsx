@@ -9,8 +9,6 @@ export default function Navbar() {
       color="inherit"
       elevation={0}
       sx={{
-        borderBottom: 1,
-        borderColor: "divider",
         zIndex: (theme) => theme.zIndex.drawer + 1,
       }}
     >
