@@ -25,7 +25,7 @@ export default function Navbar() {
     >
       <Toolbar disableGutters>
         <Box sx={{ width: 72, display: "flex", justifyContent: "center", flexShrink: 0 }}>
-          <Tooltip title={toggleLabel}>
+          <Tooltip title={toggleLabel} placement="right">
             <IconButton
               aria-label={toggleLabel}
               onClick={toggleSidebar}

@@ -7,6 +7,8 @@ type TSidebarProps = {
   width: number;
 };
 
+const SIDEBAR_ITEM_SIZE = 44;
+
 export default function Sidebar({ isExpanded, width }: TSidebarProps) {
   const { pathname } = useLocation();
 
@@ -50,19 +52,22 @@ export default function Sidebar({ isExpanded, width }: TSidebarProps) {
                     const activeBackground = theme.palette.mode === "dark" ? "#f5f5f0" : "#000000";
                     const activeForeground = theme.palette.mode === "dark" ? "#111111" : "#ffffff";
                     const activeHoverBackground = theme.palette.mode === "dark" ? "#e5e5df" : "#202020";
-                    const hasItemBackground = isActive && isExpanded;
 
                     return {
-                      minHeight: 44,
+                      width: isExpanded ? "auto" : SIDEBAR_ITEM_SIZE,
+                      height: SIDEBAR_ITEM_SIZE,
+                      minHeight: SIDEBAR_ITEM_SIZE,
+                      mx: isExpanded ? 0 : "auto",
                       justifyContent: isExpanded ? "initial" : "center",
                       borderRadius: 1,
-                      px: 1.5,
-                      color: hasItemBackground ? activeForeground : "text.primary",
+                      px: isExpanded ? 1.5 : 0,
+                      py: 0,
+                      color: isActive ? activeForeground : "text.primary",
                       "&.Mui-selected": {
-                        bgcolor: hasItemBackground ? activeBackground : "transparent",
+                        bgcolor: activeBackground,
                       },
                       "&.Mui-selected:hover": {
-                        bgcolor: hasItemBackground ? activeHoverBackground : "action.hover",
+                        bgcolor: activeHoverBackground,
                       },
                       "& .MuiSvgIcon-root": {
                         fontSize: 22,
@@ -71,22 +76,14 @@ export default function Sidebar({ isExpanded, width }: TSidebarProps) {
                   }}
                 >
                   <ListItemIcon
-                    sx={(theme) => {
-                      const activeBackground = theme.palette.mode === "dark" ? "#f5f5f0" : "#000000";
-                      const activeForeground = theme.palette.mode === "dark" ? "#111111" : "#ffffff";
-                      const inactiveForeground = theme.palette.mode === "dark" ? "#f5f5f0" : "#000000";
-
-                      return {
-                        width: 32,
-                        minWidth: 32,
-                        height: 32,
-                        alignItems: "center",
-                        justifyContent: "center",
-                        mr: isExpanded ? 1.5 : 0,
-                        borderRadius: 1,
-                        bgcolor: isActive && !isExpanded ? activeBackground : "transparent",
-                        color: isActive ? activeForeground : inactiveForeground,
-                      };
+                    sx={{
+                      width: 32,
+                      minWidth: 32,
+                      height: 32,
+                      alignItems: "center",
+                      justifyContent: "center",
+                      mr: isExpanded ? 1.5 : 0,
+                      color: "inherit",
                     }}
                   >
                     {isActive ? route.activeIcon : route.icon}
