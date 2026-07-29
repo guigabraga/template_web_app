@@ -2,6 +2,8 @@ import type { TPostAuthUserData } from "@template-web-app/shared-types/auth";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
+const AUTH_STORAGE_KEY = "template-web-app-auth";
+
 type TAuthUser = Omit<TPostAuthUserData, "token">;
 
 type TAuthStore = {
@@ -17,14 +19,18 @@ const useAuthStore = create<TAuthStore>()(
       token: null,
       user: null,
       setSession: ({ token, ...user }) => set({ token, user }),
-      clearSession: () => set({ token: null, user: null }),
+      clearSession: () => {
+        set({ token: null, user: null });
+        sessionStorage.removeItem(AUTH_STORAGE_KEY);
+        localStorage.removeItem(AUTH_STORAGE_KEY);
+      },
     }),
     {
-      name: "template-web-app-auth",
+      name: AUTH_STORAGE_KEY,
       storage: createJSONStorage(() => sessionStorage),
       partialize: ({ token, user }) => ({ token, user }),
     },
   ),
 );
 
-export { useAuthStore, type TAuthStore, type TAuthUser };
+export { AUTH_STORAGE_KEY, useAuthStore, type TAuthStore, type TAuthUser };

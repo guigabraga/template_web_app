@@ -1,5 +1,8 @@
+import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import { Navigate } from "react-router-dom";
 import type { ReactElement } from "react";
+import { Home } from "../pages/private/paths";
 import { Login } from "../pages/public/paths";
 
 type TRouterObject = {
@@ -17,7 +20,7 @@ type TRouterConfig = {
   private: TRouterObject[];
 };
 
-export const Router: TRouterConfig = {
+const Router: TRouterConfig = {
   public: [
     {
       path: "/login",
@@ -30,5 +33,17 @@ export const Router: TRouterConfig = {
       element: <Navigate to="/login" replace />,
     },
   ],
-  private: [],
+  private: [
+    {
+      path: "/home",
+      available: true,
+      element: <Home />,
+      title: "Início",
+      icon: <HomeOutlinedIcon />,
+      activeIcon: <HomeRoundedIcon />,
+      panel: "general",
+    },
+  ],
 };
+
+export { Router };

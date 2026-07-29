@@ -1,5 +1,11 @@
+import { useAuthStore } from "./stores";
+import Private from "./routes/Private";
 import Public from "./routes/Public";
 
-export default function App() {
-  return <Public />;
-}
+const App = () => {
+  const token = useAuthStore((state) => state.token);
+
+  return token ? <Private /> : <Public />;
+};
+
+export default App;
