@@ -1,7 +1,9 @@
+import { apiReference } from "@scalar/express-api-reference";
 import cors from "cors";
 import { Router, type Response } from "express";
 import { uptime } from "node:process";
 import { PostAuthController } from "./controllers/Auth.js";
+import { openApiDocument } from "./docs/OpenApi.js";
 
 const Routes = Router();
 const allowedOrigins = (process.env.CORS_ORIGIN ?? "http://localhost:3002,http://127.0.0.1:3002")
@@ -26,6 +28,14 @@ Routes.get("/health", (_, res: Response) => {
     },
   });
 });
+
+Routes.get(
+  "/docs",
+  apiReference({
+    content: openApiDocument,
+    pageTitle: "Template Web App API",
+  }),
+);
 
 Routes.post("/auth", PostAuthController);
 

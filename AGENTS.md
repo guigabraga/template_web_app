@@ -111,6 +111,19 @@ Use estes sufixos obrigatórios:
 - Registre middlewares somente em `Routes.ts`; não os invoque manualmente em
   controllers ou services.
 
+### Documentação Scalar
+
+- Documente toda nova rota da API no documento OpenAPI usado pelo Scalar em
+  `apps/api/src/docs/OpenApi.ts`, na mesma alteração que implementa a rota.
+- Mantenha a documentação sincronizada ao alterar contratos, parâmetros,
+  autenticação, headers, status HTTP ou respostas de uma rota existente.
+- Documente método, path, `operationId`, parâmetros, body, exemplos, respostas
+  e requisitos de segurança aplicáveis.
+- Reutilize schemas Zod de `packages/shared-types` com `toJSONSchema` quando
+  existirem, evitando duplicar manualmente o contrato de entrada.
+- Considere uma rota incompleta enquanto ela não estiver disponível e correta
+  na interface Scalar em `GET /docs`.
+
 ## Validação Obrigatória
 
 Após mudanças na API, execute:

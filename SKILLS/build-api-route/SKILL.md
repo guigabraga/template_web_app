@@ -1,6 +1,6 @@
 ---
 name: build-api-route
-description: Constrói e altera rotas Express da API do template_web_app seguindo o fluxo Routes, Middleware, Controller, Service, Repository e Util. Use ao criar endpoints, adicionar métodos ou variações de paths, reorganizar lógica de domínio, criar queries Prisma, adicionar validações reutilizáveis ou revisar se uma rota em apps/api segue as convenções arquiteturais do projeto.
+description: Constrói, altera e documenta no Scalar rotas Express da API do template_web_app seguindo o fluxo Routes, Middleware, Controller, Service, Repository e Util. Use ao criar endpoints, adicionar métodos ou variações de paths, reorganizar lógica de domínio, criar queries Prisma, adicionar validações reutilizáveis ou revisar se uma rota em apps/api segue as convenções arquiteturais e de documentação do projeto.
 ---
 
 # Construir Rota Da API
@@ -159,7 +159,27 @@ Routes.get("/user/:id", ValidateTokenMiddleware, GetUserIdController);
 Usar middlewares somente aqui. O middleware valida sua preocupação transversal,
 responde à própria falha ou chama `next()`.
 
-## 8. Organizar Exports
+## 8. Documentar No Scalar
+
+Documentar toda nova rota em `apps/api/src/docs/OpenApi.ts` na mesma alteração
+que implementa o endpoint. Atualizar a operação existente sempre que o contrato
+ou comportamento HTTP mudar.
+
+Incluir:
+
+- método, path, tag, resumo e `operationId`;
+- parâmetros de path e query;
+- body, content type e exemplos;
+- todos os status HTTP possíveis e seus schemas de resposta;
+- headers e requisitos de autenticação aplicáveis.
+
+Reutilizar schemas Zod de `packages/shared-types` com `toJSONSchema` quando
+existirem. Evitar duplicar manualmente contratos compartilhados.
+
+Considerar a rota incompleta até confirmar que ela aparece corretamente em
+`GET /docs` e que a execução interativa aponta para o endpoint esperado.
+
+## 9. Organizar Exports
 
 Manter uma única declaração de export no final de cada arquivo para a função e
 seus types públicos:
@@ -177,7 +197,7 @@ export {
 Não espalhar `export` pelas declarações nem criar múltiplos blocos de export no
 mesmo módulo.
 
-## 9. Validar
+## 10. Validar
 
 Executar:
 
@@ -189,3 +209,6 @@ npm run build
 
 Quando a rota depender de PostgreSQL, JWT ou middleware, testar também o fluxo
 real no container dev, incluindo sucesso e erros esperados.
+
+Testar `GET /docs` após criar ou alterar uma rota e conferir a operação
+documentada no Scalar.
